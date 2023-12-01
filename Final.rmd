@@ -1,12 +1,12 @@
 ---
 title: "Covid91 vaccine study Final2023"
-author: "Hannah vong "
+author: "Hannah vong'
 output: 
   html_document:
     number_sections: true
     toc: true
     toc_depth: 5
-date: "`r Sys.Date()`" 
+date: 11/30/2023`" 
 ---
 
 ```{r include=FALSE,echo=FALSE}
