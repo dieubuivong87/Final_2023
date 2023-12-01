@@ -1,6 +1,6 @@
 ---
 title: "Covid91 vaccine study Final2023"
-author: "Put your name here!"
+author: "Hannah vong "
 output: 
   html_document:
     number_sections: true
@@ -26,15 +26,150 @@ A new  preventative vaccine (covid921) is under test in clinical trials. Given t
 
 ## Males
 
+$H_0$ The Covid - 921 vaccine does not  exhibit a significant difference in effectiveness between male populations.
+$H_A$ The Covid -921 vaccine does exhibit a significant difference in effectiveness between male populations.
+
+
+```{r}
+library(dplyr)
+Males = filter(FinalData, FinalData$sex=='M')
+```
+
+# Methods 
+
+Male is categorical variable, Covid-921 vaccine  administration is an  explanatory variable, covid-19  prevention effectiveness is the  responese variable. Therefore, we use cat ~ cat helper file.
+
+# Results 
+
+## Descriptive Results 
+
+### Graphical Descriptive Results
+
+```{r}
+barchartGC(~infected + treatment,data=Males)
+barchartGC(~infected + treatment,data=Males, type="percent")
+
+```
+
+This bar grapgh shows among the people who got covid19 , the folks that received the treatment vaccine had a significant reduction in catching aids. Compared to those thatreceived no vaccine, the percentage that causht aids is closer to 50%
+
+### Numrical Descriptive Results
+
+```{r}
+table2 <- xtabs(~infected + treatment, data=Males)
+rowPerc(table2)
+colPerc(table2)
+```
+
+The number in those who are infected with covids19 is higher among those who got the placebo. The people who got the vaccine are 2x less likely to develop aids against those who got the placebo.
+
+## Inferential Results
+
+
+```{r}
+chisq.test(table2)
+chisqtestGC(table2)
+```
+
+The P value is .0000001098 therefore we reject the null hypothesis
+
+
+```{r}
+Males$infected=factor(Males$infected,c('none','aids'))
+fisher.test(Males$treatment,Males$infected)
+```
 
 ## Females
 
+$H_0$ The Covid - 921 vaccine does not  exhibit a significant difference in effectiveness between Females populations.
+$H_A$ The Covid -921 vaccine does exhibit a significant difference in effectiveness between Females populations.
+
+
+```{r}
+library(dplyr)
+Females = filter(FinalData, FinalData$sex=='F')
+```
+
+# Methods
+
+FeMale is categorical variable, Covid-921 vaccine  administration is an  explanatory variable, covid-19  prevention effectiveness is the  responese variable. Therefore, we use cat ~ cat helper file.
+
+
+### Graphical Descriptive Results
+
+
+```{r}
+barchartGC(~infected + treatment,data=Females)
+barchartGC(~infected + treatment,data=Females, type="percent")
+
+```
+
+This bar grapgh shows among the people who got covid19 , the folks that received the treatment vaccine had a significant reduction in catching aids. Compared to those thatreceived no vaccine, the percentage that causht aids is closer to 50%
+
+
+### Numrical Descriptive Results
+
+```{r}
+table2 <- xtabs(~infected + treatment, data=Females)
+rowPerc(table2)
+colPerc(table2)
+```
+The number in those who are infected with covids19 is higher among those who got the placebo. The people who got the vaccine are 3x less likely to develop aids against those who got the placebo.
+
+## Inferential Results
+
+
+```{r}
+chisq.test(table2)
+chisqtestGC(table2)
+```
+
+```{r}
+Females$infected=factor(Females$infected,c('none','aids'))
+fisher.test(Females$treatment,Females$infected)
+```
 
 ## LGBTQ
 
+$H_0$ The Covid - 921 vaccine does not  exhibit a significant difference in effectiveness between LGBTQ populations.
+$H_A$ The Covid -921 vaccine does exhibit a significant difference in effectiveness between LGBTQ populations.
+
+
+```{r}
+library(dplyr)
+LGBTQ = filter(FinalData, FinalData$sex=='LGBTQ')
+```
+
+# Methods
+
+LGBTQ is categorical variable, Covid-921 vaccine  administration is an  explanatory variable, covid-19  prevention effectiveness is the  responese variable. Therefore, we use cat ~ cat helper file.
+
+
+### Graphical Descriptive Results
+
+
+```{r}
+barchartGC(~infected + treatment,data=gay)
+barchartGC(~infected + treatment,data=gay, type="percent")
+
+```
 
 
 ## Druggies
 
+```{r}
+library(dplyr)
+DrugUser = filter(FinalData, FinalData$sex=='DrugUser')
+```
+
+```{r}
+barchartGC(~infected + treatment,data=DrugUser)
+barchartGC(~infected + treatment,data=DrugUser, type="percent")
+
+```
+
 
 # Overall Results and Conclusions
+
+The COVID-921 vaccine is currently undergoing clinical trials, and there is a need to evaluate its effectiveness across various subpopulations. This report aims to analyze the vaccine's efficacy based on gender (males and females), drug use, and sexual orientation.
+p < 0.05, reject the null hypothesis, indicating a significant difference in effectiveness based on sexual orientation
